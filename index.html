@@ -10,18 +10,38 @@
     <style>
         :root { --primary-color: #2c3e50; --accent-color: #c0a080; }
         .calligraphy { font-family: "Kaiti TC", "標楷體", "Noto Serif TC", serif; letter-spacing: 2px; }
-        body { font-family: "Microsoft JhengHei", sans-serif; color: #333; line-height: 1.7; }
+        body { font-family: "Microsoft JhengHei", sans-serif; color: #333; line-height: 1.8; }
         .navbar { background-color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .hero-section { background: linear-gradient(rgba(44, 62, 80, 0.85), rgba(44, 62, 80, 0.85)), url('https://images.unsplash.com/photo-1582408921715-18e7806367c1?auto=format&fit=crop&w=1600&q=80'); background-size: cover; background-position: center; color: white; padding: 120px 0; text-align: center; }
-        .section-title { position: relative; padding-bottom: 15px; margin-bottom: 40px; }
-        .section-title::after { content: ""; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 50px; height: 3px; background-color: var(--accent-color); }
-        .service-card, .news-card { border: none; border-radius: 15px; transition: all 0.3s; background: #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .service-card { border-bottom: 4px solid var(--accent-color); }
-        .service-card:hover, .news-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        .news-date { color: var(--accent-color); font-size: 0.85rem; font-weight: bold; }
-        .btn-primary { background-color: var(--primary-color); border: none; padding: 12px 30px; }
-        .btn-line { background-color: #00b900; color: white; padding: 12px 30px; border-radius: 5px; text-decoration: none; display: inline-block; }
-        footer { background-color: var(--primary-color); color: rgba(255,255,255,0.8); padding: 60px 0; }
+        
+        /* 形象牆 */
+        .hero-section { 
+            background: linear-gradient(rgba(44, 62, 80, 0.85), rgba(44, 62, 80, 0.85)), url('https://images.unsplash.com/photo-1582408921715-18e7806367c1?auto=format&fit=crop&w=1600&q=80'); 
+            background-size: cover; background-position: center; color: white; padding: 140px 0; text-align: center; 
+        }
+
+        /* 標題裝飾 */
+        .section-title { position: relative; padding-bottom: 15px; margin-bottom: 50px; text-align: center; }
+        .section-title::after { content: ""; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background-color: var(--accent-color); }
+
+        /* 卡片設計 */
+        .service-card, .news-card, .advantage-card { 
+            border: none; border-radius: 20px; transition: all 0.3s; background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
+        }
+        .service-card:hover, .news-card:hover { transform: translateY(-10px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+        .service-card { border-top: 5px solid var(--accent-color); }
+        
+        /* 流程圖設計 */
+        .process-step { text-align: center; position: relative; padding: 20px; }
+        .step-number { width: 50px; height: 50px; background: var(--primary-color); color: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-weight: bold; font-size: 1.2rem; border: 2px solid var(--accent-color); }
+        
+        /* 其他細節 */
+        .news-date { color: var(--accent-color); font-size: 0.85rem; font-weight: bold; display: block; margin-bottom: 5px; }
+        .btn-primary { background-color: var(--primary-color); border: none; padding: 12px 35px; border-radius: 8px; }
+        .btn-line { background-color: #00b900; color: white; padding: 12px 35px; border-radius: 8px; text-decoration: none; display: inline-block; transition: 0.3s; }
+        .btn-line:hover { background-color: #009900; color: white; transform: scale(1.05); }
+        
+        footer { background-color: var(--primary-color); color: rgba(255,255,255,0.7); padding: 80px 0; }
+        .footer-logo { color: white; font-size: 1.8rem; margin-bottom: 20px; }
     </style>
 </head>
 <body>
@@ -29,10 +49,14 @@
 <nav class="navbar navbar-expand-lg sticky-top">
     <div class="container">
         <a class="navbar-brand calligraphy" href="#"><strong>墨羽地政士事務所</strong></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="#news">最新資訊</a></li>
+                <li class="nav-item"><a class="nav-link" href="#news">最新修法</a></li>
                 <li class="nav-item"><a class="nav-link" href="#services">專業服務</a></li>
+                <li class="nav-item"><a class="nav-link" href="#process">辦理流程</a></li>
                 <li class="nav-item"><a class="nav-link" href="#contact">聯絡諮詢</a></li>
             </ul>
         </div>
@@ -41,102 +65,169 @@
 
 <header class="hero-section">
     <div class="container">
-        <h1 class="calligraphy fw-bold mb-3">墨筆定契，羽翼承託</h1>
-        <p class="lead mb-4 fs-4">地政士 許志傑 | 專業、誠信、效率</p>
-        <div class="d-flex justify-content-center gap-3 flex-wrap">
-            <a href="tel:0926556662" class="btn btn-primary btn-lg"><i class="bi bi-telephone-fill me-2"></i>撥打電話預約</a>
-            <a href="https://line.me/ti/p/~@806nehlp" class="btn-line btn-lg"><i class="bi bi-line me-2"></i>LINE 線上諮詢</a>
+        <h1 class="calligraphy fw-bold mb-3" style="font-size: 3.5rem;">墨筆定契，羽翼承託</h1>
+        <p class="lead mb-5 fs-3">地政士 許志傑 | 專業、誠信、效率</p>
+        <div class="d-flex justify-content-center gap-4 flex-wrap">
+            <a href="tel:0926556662" class="btn btn-primary btn-lg shadow"><i class="bi bi-telephone-fill me-2"></i>撥打電話預約</a>
+            <a href="https://line.me/ti/p/~@806nehlp" class="btn-line btn-lg shadow"><i class="bi bi-line me-2"></i>LINE 線上諮詢</a>
         </div>
     </div>
 </header>
 
 <section id="news" class="py-5">
     <div class="container">
-        <h2 class="text-center section-title">最新資訊</h2>
+        <h2 class="section-title">2026 不動產修法動態</h2>
         <div class="row g-4">
             <div class="col-md-4">
-                <div class="card news-card h-100 p-3" data-bs-toggle="modal" data-bs-target="#newsModal1" style="cursor: pointer;">
-                    <span class="news-date">2026-01-22</span>
-                    <h5 class="fw-bold mt-2">2026 不動產修法最新重點</h5>
-                    <p class="text-muted small mb-0">全面解析土地與租賃法規變動...</p>
+                <div class="card news-card h-100 p-4" data-bs-toggle="modal" data-bs-target="#newsModal1" style="cursor: pointer;">
+                    <span class="news-date">2026.01.22 更新</span>
+                    <h5 class="fw-bold">2026 不動產修法重點</h5>
+                    <p class="text-muted small">解析地價稅調整與租賃法規新制...</p>
+                    <div class="text-end text-primary small">閱讀更多 <i class="bi bi-arrow-right"></i></div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card news-card h-100 p-3" data-bs-toggle="modal" data-bs-target="#newsModal2" style="cursor: pointer;">
-                    <span class="news-date">2026-01-15</span>
-                    <h5 class="fw-bold mt-2">如何透過繼承規劃節省稅務？</h5>
-                    <p class="text-muted small mb-0">專業試算與省稅方案分享...</p>
+                <div class="card news-card h-100 p-4" data-bs-toggle="modal" data-bs-target="#newsModal2" style="cursor: pointer;">
+                    <span class="news-date">2026.01.15 更新</span>
+                    <h5 class="fw-bold">繼承規劃節稅祕訣</h5>
+                    <p class="text-muted small">如何合法規劃讓資產傳承不縮水...</p>
+                    <div class="text-end text-primary small">閱讀更多 <i class="bi bi-arrow-right"></i></div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card news-card h-100 p-3" data-bs-toggle="modal" data-bs-target="#newsModal3" style="cursor: pointer;">
-                    <span class="news-date">2026-01-10</span>
-                    <h5 class="fw-bold mt-2">防範房地產詐騙：地籍異動即時通</h5>
-                    <p class="text-muted small mb-0">保護您的不動產產權安全...</p>
+                <div class="card news-card h-100 p-4" data-bs-toggle="modal" data-bs-target="#newsModal3" style="cursor: pointer;">
+                    <span class="news-date">2026.01.05 宣導</span>
+                    <h5 class="fw-bold">防詐：地籍異動即時通</h5>
+                    <p class="text-muted small">免費協助申請，即時守護房產安全...</p>
+                    <div class="text-end text-primary small">閱讀更多 <i class="bi bi-arrow-right"></i></div>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<section id="services" class="py-5 bg-light">
-    <div class="container text-center">
-        <h2 class="mb-5 section-title text-center">專業服務項目</h2>
-        <div class="row g-4 text-start text-center">
-            <div class="col-md-4"><div class="card h-100 service-card p-4"><h4>不動產移轉</h4><p class="text-muted small">買賣、贈與、共有物分割、繼承登記及建物第一次登記。</p></div></div>
-            <div class="col-md-4"><div class="card h-100 service-card p-4"><h4>稅務規劃</h4><p class="text-muted small">土地增值稅、房地合一稅、遺產稅試算與專業節稅規劃。</p></div></div>
-            <div class="col-md-4"><div class="card h-100 service-card p-4"><h4>抵押權設定</h4><p class="text-muted small">銀行貸款設定、塗銷、私人借貸見證及各類他項權利登記。</p></div></div>
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h2 class="mb-4 calligraphy">為什麼選擇墨羽？</h2>
+                <p class="mb-4">我們秉持法律人的嚴謹，同時提供溫暖體貼的諮詢服務。無論是土地過戶或複雜的遺產規劃，地政士許志傑親自為您把關每一個細節。</p>
+                <div class="row g-3">
+                    <div class="col-sm-6"><i class="bi bi-patch-check-fill text-primary me-2"></i>地政士全程親自辦理</div>
+                    <div class="col-sm-6"><i class="bi bi-patch-check-fill text-primary me-2"></i>收費透明且公開</div>
+                    <div class="col-sm-6"><i class="bi bi-patch-check-fill text-primary me-2"></i>預約制一對一隱密諮詢</div>
+                    <div class="col-sm-6"><i class="bi bi-patch-check-fill text-primary me-2"></i>數位化案件進度回報</div>
+                </div>
+            </div>
+            <div class="col-lg-6 mt-5 mt-lg-0">
+                <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=800&q=80" class="img-fluid rounded-4 shadow-lg" alt="專業諮詢">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="services" class="py-5">
+    <div class="container">
+        <h2 class="section-title">專業服務內容</h2>
+        <div class="row g-4 text-center">
+            <div class="col-md-4">
+                <div class="card h-100 service-card p-5">
+                    <div class="fs-1 text-secondary mb-3"><i class="bi bi-file-earmark-ruled"></i></div>
+                    <h4 class="fw-bold">不動產移轉</h4>
+                    <p class="text-muted">買賣、贈與、繼承、共有物分割及建物所有權登記。</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 service-card p-5">
+                    <div class="fs-1 text-secondary mb-3"><i class="bi bi-cash-coin"></i></div>
+                    <h4 class="fw-bold">稅務規劃</h4>
+                    <p class="text-muted">土增稅自用優惠、房地合一稅、遺產與贈與稅專業試算。</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 service-card p-5">
+                    <div class="fs-1 text-secondary mb-3"><i class="bi bi-shield-lock"></i></div>
+                    <h4 class="fw-bold">抵押權設定</h4>
+                    <p class="text-muted">銀行貸款、私人間借貸設定、塗銷及各類權利登記。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="process" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="section-title">案件辦理流程</h2>
+        <div class="row g-0">
+            <div class="col-md-3 process-step">
+                <div class="step-number">01</div>
+                <h5 class="fw-bold">初步諮詢</h5>
+                <p class="small text-muted">了解您的需求，提供初步專業建議與評估。</p>
+            </div>
+            <div class="col-md-3 process-step">
+                <div class="step-number">02</div>
+                <h5 class="fw-bold">文件準備</h5>
+                <p class="small text-muted">協助彙整權狀、身分證明等辦理所需文件。</p>
+            </div>
+            <div class="col-md-3 process-step">
+                <div class="step-number">03</div>
+                <h5 class="fw-bold">申報送件</h5>
+                <p class="small text-muted">進行報稅與地政事務所送件，親自監督流程。</p>
+            </div>
+            <div class="col-md-3 process-step">
+                <div class="step-number">04</div>
+                <h5 class="fw-bold">結案領件</h5>
+                <p class="small text-muted">完成登記，交付新權狀與相關收據予客戶。</p>
+            </div>
         </div>
     </div>
 </section>
 
 <footer id="contact">
     <div class="container">
-        <div class="row gy-4">
-            <div class="col-md-7">
-                <h3 class="text-white mb-4 calligraphy">墨羽地政士事務所</h3>
-                <p class="mb-2">地政士：許志傑</p>
-                <p class="mb-2">地址：台中市外埔區六分路六支巷27號 
-                    <a href="https://www.google.com/maps/search/?api=1&query=台中市外埔區六分路六支巷27號" target="_blank" class="ms-2 badge bg-secondary text-decoration-none"><i class="bi bi-geo-alt-fill"></i> 打開地圖導航</a>
-                </p>
-                <p class="mb-2">電話：0926-556662</p>
-                <p>LINE ID：@806nehlp</p>
+        <div class="row gy-5">
+            <div class="col-md-6">
+                <h2 class="calligraphy footer-logo">墨羽地政士事務所</h2>
+                <p class="fs-5 mb-4 text-white">地政士 許志傑</p>
+                <div class="mb-3"><i class="bi bi-geo-alt-fill me-2 text-accent"></i> 
+                    地址：台中市外埔區六分路六支巷27號 
+                    <a href="https://www.google.com/maps/search/?api=1&query=台中市外埔區六分路六支巷27號" target="_blank" class="ms-2 badge bg-light text-dark text-decoration-none">打開地圖</a>
+                </div>
+                <div class="mb-3"><i class="bi bi-telephone-fill me-2 text-accent"></i> 電話：<a href="tel:0926556662" class="text-white text-decoration-none">0926-556662</a></div>
+                <div class="mb-3"><i class="bi bi-line me-2 text-accent"></i> LINE ID：@806nehlp</div>
             </div>
-            <div class="col-md-5 text-md-end">
-                <h5 class="text-white mb-4">服務時間</h5>
-                <p>週一至週五 09:00 - 18:00</p>
-                <p class="text-secondary small">例假日歡迎事先預約洽談</p>
+            <div class="col-md-3">
+                <h5 class="text-white mb-4">服務資訊</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><i class="bi bi-clock me-2"></i>週一至週五 09:00 - 18:00</li>
+                    <li class="mb-2"><i class="bi bi-calendar-check me-2"></i>假日及夜間可預約</li>
+                    <li class="mb-2"><i class="bi bi-globe me-2"></i>服務區域：台中及鄰近縣市</li>
+                </ul>
+            </div>
+            <div class="col-md-3 text-md-end">
+                <a href="https://line.me/ti/p/~@806nehlp" class="btn btn-outline-light mb-3 w-100">立即 LINE 諮詢</a>
+                <p class="small">專業可靠，誠信委託</p>
             </div>
         </div>
-        <hr class="my-4 border-secondary">
-        <p class="text-center small text-secondary mb-0">© 2026 墨羽地政士事務所 版權所有</p>
+        <hr class="my-5 opacity-25">
+        <p class="text-center small mb-0 text-secondary">© 2026 墨羽地政士事務所 版權所有 | 地政士 許志傑</p>
     </div>
 </footer>
 
 <div class="modal fade" id="newsModal1" tabindex="-1">
-    <div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><h5 class="modal-title fw-bold">2026 不動產修法最新重點</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
-    <div class="modal-body">
-        <h6><strong>1. 租賃條款強化</strong></h6>
-        <p>因應市場變動，2026年細化了租賃契約中關於「修繕責任」與「租金調漲」的規範，保障房東與房客雙方權利義務更加對等。</p>
-        <h6><strong>2. 地價稅稅基調整</strong></h6>
-        <p>本年度適逢地方政府重新評定公告地價，請務必留意自用住宅用地申請期限（9月22日前），以節省四倍價差的地價稅。</p>
-        <h6><strong>3. 虛擬虛假合約罰則</strong></h6>
-        <p>針對實價登錄之不實申報加強稽查，情節嚴重者將面臨行政處罰甚至法律責任，辦理登記時務必誠實申報。</p>
+    <div class="modal-dialog modal-lg"><div class="modal-content text-start"><div class="modal-header"><h5 class="modal-title fw-bold">2026 不動產修法重點</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body">
+        <h6><strong>1. 租賃新制解析：</strong>2026年加強了租賃契約中關於修繕責任的認定與租金調漲的限制。</h6>
+        <h6><strong>2. 地價稅申報：</strong>提醒您，自用住宅地價稅優待稅率需於每年9月22日前提出申請，錯過即需再等一年。</h6>
+        <h6><strong>3. 實價登錄：</strong>申報不實之罰則再度提高，務必誠實申報以保障自身權利。</h6>
     </div></div></div>
 </div>
 
 <div class="modal fade" id="newsModal2" tabindex="-1">
-    <div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title fw-bold">繼承規劃與稅務節省</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
-    <div class="modal-body">
-        繼承不僅是法律問題，更是稅務規劃。透過「協議分割」與「分次贈與」的靈活運用，可以大幅度合法減免不動產轉移時產生的稅金。墨羽地政士提供專業案件分析，讓您留給下一代的財產不縮水。
-    </div></div></div>
+    <div class="modal-dialog"><div class="modal-content text-start"><div class="modal-header"><h5 class="modal-title fw-bold">繼承規劃節稅祕訣</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body">透過預立遺囑、分次贈與以及「協議分割繼承」的策略，能有效合法降低遺產稅負擔。我們提供專業的案件分析，協助您完成財富平穩傳承。</div></div></div>
 </div>
 
 <div class="modal fade" id="newsModal3" tabindex="-1">
-    <div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title fw-bold">地籍異動即時通：財產防護牆</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
-    <div class="modal-body">
-        近期產權詐騙案件頻傳，內政部推廣「地籍異動即時通」。只要您的名下不動產有任何申請買賣、抵押、贈與等異動，系統會立即簡訊通知。本事務所可免費協助客戶申請開通此功能。
-    </div></div></div>
+    <div class="modal-dialog"><div class="modal-content text-start"><div class="modal-header"><h5 class="modal-title fw-bold">防詐：地籍異動即時通</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body">不動產詐騙層出不窮！開通「地籍異動即時通」後，只要您的名下產權有任何買賣、抵押、贈與等異動，系統會立即傳簡訊與電子郵件通知您。墨羽可免費協助客戶臨櫃或線上辦理開通。</div></div></div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

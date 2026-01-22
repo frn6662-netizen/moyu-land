@@ -8,43 +8,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #2c3e50; /* 墨色 */
-            --accent-color: #c0a080;  /* 金羽色 */
+            --primary-color: #2c3e50;
+            --accent-color: #c0a080;
         }
-        
-        /* 定義毛筆書法風格的 Class */
-        .calligraphy {
-            font-family: "Kaiti TC", "標楷體", "Noto Serif TC", serif;
-            letter-spacing: 2px;
-        }
-
-        body { font-family: "Microsoft JhengHei", "PingFang TC", sans-serif; color: #333; line-height: 1.6; }
+        .calligraphy { font-family: "Kaiti TC", "標楷體", "Noto Serif TC", serif; letter-spacing: 2px; }
+        body { font-family: "Microsoft JhengHei", sans-serif; color: #333; line-height: 1.6; }
         .navbar { background-color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .navbar-brand { font-size: 1.5rem; color: var(--primary-color) !important; }
         
         .hero-section {
             background: linear-gradient(rgba(44, 62, 80, 0.85), rgba(44, 62, 80, 0.85)), url('https://images.unsplash.com/photo-1582408921715-18e7806367c1?auto=format&fit=crop&w=1600&q=80');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            padding: 120px 0;
-            text-align: center;
+            background-size: cover; background-position: center; color: white; padding: 100px 0; text-align: center;
         }
         
-        .hero-section h1 { font-size: 3.5rem; }
-        
-        .service-card {
-            border: none;
-            border-radius: 15px;
-            transition: all 0.3s;
-            border-bottom: 4px solid var(--accent-color);
-            background: #fff;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        .service-card, .news-card {
+            border: none; border-radius: 15px; transition: all 0.3s;
+            background: #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
-        .service-card:hover { transform: translateY(-10px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        .btn-primary { background-color: var(--primary-color); border: none; padding: 12px 30px; }
-        .btn-line { background-color: #00b900; color: white; border: none; padding: 12px 30px; border-radius: 5px; text-decoration: none; display: inline-block; }
-        .btn-line:hover { background-color: #009900; color: white; }
+        .service-card { border-bottom: 4px solid var(--accent-color); }
+        .service-card:hover, .news-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        
+        .news-date { color: var(--accent-color); font-size: 0.9rem; font-weight: bold; }
+        .btn-primary { background-color: var(--primary-color); border: none; }
+        .btn-line { background-color: #00b900; color: white; padding: 12px 30px; border-radius: 5px; text-decoration: none; display: inline-block; }
         footer { background-color: var(--primary-color); color: rgba(255,255,255,0.8); padding: 60px 0; }
     </style>
 </head>
@@ -53,12 +38,9 @@
 <nav class="navbar navbar-expand-lg sticky-top">
     <div class="container">
         <a class="navbar-brand calligraphy" href="#"><strong>墨羽地政士事務所</strong></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="#about">關於我們</a></li>
+                <li class="nav-item"><a class="nav-link" href="#news">最新資訊</a></li>
                 <li class="nav-item"><a class="nav-link" href="#services">專業服務</a></li>
                 <li class="nav-item"><a class="nav-link" href="#contact">聯絡諮詢</a></li>
             </ul>
@@ -77,58 +59,88 @@
     </div>
 </header>
 
-<section id="about" class="py-5">
-    <div class="container text-center">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <h2 class="mb-4">關於墨羽</h2>
-                <hr class="mx-auto" style="width: 60px; border-top: 3px solid var(--accent-color); opacity: 1;">
-                <p class="fs-5">「墨羽」象徵著契約的嚴謹與守護的輕盈。我們深知不動產處理的繁瑣與重要性，由許志傑地政士親自為您把關每一個細節，讓產權移轉與資產規劃變得簡單且安心。</p>
-                <p class="text-muted">服務區域：台中市全區及鄰近縣市</p>
+<section id="news" class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">最新資訊</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card news-card h-100 p-3" data-bs-toggle="modal" data-bs-target="#newsModal1" style="cursor: pointer;">
+                    <span class="news-date">2026-01-20</span>
+                    <h5 class="fw-bold mt-2">2026 房地合一稅新制重點解析</h5>
+                    <p class="text-muted small">點擊閱讀詳細內容...</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card news-card h-100 p-3" data-bs-toggle="modal" data-bs-target="#newsModal2" style="cursor: pointer;">
+                    <span class="news-date">2026-01-15</span>
+                    <h5 class="fw-bold mt-2">如何透過遺產規劃節省土地增值稅？</h5>
+                    <p class="text-muted small">地政士親自告訴您節稅祕訣...</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card news-card h-100 p-3" data-bs-toggle="modal" data-bs-target="#newsModal3" style="cursor: pointer;">
+                    <span class="news-date">2026-01-05</span>
+                    <h5 class="fw-bold mt-2">墨羽地政士事務所官方網站正式上線</h5>
+                    <p class="text-muted small">提供更便捷的線上諮詢服務...</p>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
 <section id="services" class="py-5 bg-light">
-    <div class="container">
-        <h2 class="text-center mb-5">專業服務</h2>
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="card h-100 service-card p-4">
-                    <h4 class="fw-bold">不動產移轉</h4>
-                    <p>買賣過戶、贈與登記、繼承登記（含協議繼承）、分割合併及建物所有權第一次登記。</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card h-100 service-card p-4">
-                    <h4 class="fw-bold">稅務節稅規劃</h4>
-                    <p>土地增值稅（一生一次/一屋）、房地合一稅試算、遺產及贈與稅省稅規劃。</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card h-100 service-card p-4">
-                    <h4 class="fw-bold">抵押權設定</h4>
-                    <p>銀行貸款設定與塗銷、私人間借貸設定契約見證、各類他項權利登記。</p>
-                </div>
-            </div>
+    <div class="container text-center">
+        <h2 class="mb-5">專業服務</h2>
+        <div class="row g-4 text-start">
+            <div class="col-md-4"><div class="card h-100 service-card p-4"><h4>不動產移轉</h4><p>買賣過戶、贈與、協議繼承登記等專業服務。</p></div></div>
+            <div class="col-md-4"><div class="card h-100 service-card p-4"><h4>稅務規劃</h4><p>土增稅、房地合一稅、遺產稅省稅方案試算。</p></div></div>
+            <div class="col-md-4"><div class="card h-100 service-card p-4"><h4>抵押權設定</h4><p>銀行貸款設定、塗銷及各類他項權利登記。</p></div></div>
         </div>
     </div>
 </section>
+
+<div class="modal fade" id="newsModal1" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title fw-bold">房地合一稅新制解析</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+                這裡可以放入詳細的新聞內容或是法律知識分享。例如：2026年針對自住換屋的優惠稅率說明...
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="newsModal2" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title fw-bold">遺產規劃節稅祕訣</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+                許多人不知道如何運用遺產稅免稅額... 這裡可以撰寫專業案例分享。
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="newsModal3" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"><h5 class="modal-title fw-bold">官網上線公告</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div>
+            <div class="modal-body">
+                很高興為大家服務！本事務所現在提供 LINE 線上預約功能，歡迎多加利用。
+            </div>
+        </div>
+    </div>
+</div>
 
 <footer id="contact">
     <div class="container">
         <div class="row gy-4">
             <div class="col-md-6">
                 <h3 class="text-white mb-4 calligraphy">墨羽地政士事務所</h3>
-                <p class="mb-2">主持地政士：許志傑</p>
-                <p class="mb-2">地址：台中市外埔區六分路六支巷27號</p>
-                <p class="mb-2">電話：<a href="tel:0926556662" class="text-white text-decoration-none">0926-556662</a></p>
-                <p>LINE ID：<span class="text-white">@806nehlp</span></p>
+                <p>地址：台中市外埔區六分路六支巷27號<br>電話：0926-556662</p>
             </div>
-            <div class="col-md-6 text-md-end d-flex flex-column justify-content-end">
-                <p>營業時間：週一至週五 09:00 - 18:00 (例假日歡迎預約)</p>
-                <p class="small text-secondary mb-0">© 2024 墨羽地政士事務所 版權所有</p>
+            <div class="col-md-6 text-md-end">
+                <p>© 2024 墨羽地政士事務所 版權所有</p>
             </div>
         </div>
     </div>
